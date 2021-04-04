@@ -47,7 +47,6 @@ class UserRepository implements IUserRepository
 
     public function sumWalletValue(int $id, float $value)
     {
-//        return User::where('id', $id)->update(array('wallet_balance' => $value));
-        return 0;
+       return User::where('id', $id)->update(array('wallet_balance' => $value));
     }
 }
