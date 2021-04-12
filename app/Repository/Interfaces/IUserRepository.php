@@ -14,7 +14,7 @@ interface IUserRepository
 
     public function create($user);
 
-    public function save($user);
+    public function save(User $user);
 
     public function destroy(int $id);
 
@@ -23,5 +23,7 @@ interface IUserRepository
     public function getWalletAmount(int $id);
 
     public function sumWalletValue(int $id, float $value);
+
+    public function findByEmail(String $email);
 
 }

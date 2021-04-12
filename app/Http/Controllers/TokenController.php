@@ -5,29 +5,30 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Services\TokenService;
 use Firebase\JWT\JWT;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use \Exception;
 
 class TokenController extends Controller
 {
 
+    private $tokenService;
+
+    public function __construct(TokenService $token)
+    {
+        $this->tokenService = $token;
+    }
+
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|min:3',
-        ]);
-
-        $user_exist = User::where('email', $request->email)->first();
-
-        if(is_null($user_exist) || !Hash::check($request->password, $user_exist->password)){
-            return response()->json('Usuário ou senha inválidos', 401);
+        try {
+            return response()->json($this->tokenService->login($request));
+        }catch (Exception $e){
+            return response()->json(['Error' => $e->getMessage()], $e->getCode());
         }
-
-        $token = JWT::encode(['email' => $request->email], env('JWT_KEY'));
-
-        return ['access_token' => $token];
 
     }
 

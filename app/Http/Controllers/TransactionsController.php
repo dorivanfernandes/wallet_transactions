@@ -17,11 +17,6 @@ class TransactionsController extends BaseController
     public function __construct(TransactionsService $transactionsService)
     {
         $this->service = $transactionsService;
-        $this->validations = [
-            'user_payer' => 'required|exists:users,id',
-            'user_payee' => 'required|exists:users,id',
-            'transaction_value' => 'required|gt:0'
-        ];
     }
 
 

@@ -25,9 +25,10 @@ class UserRepository implements IUserRepository
         return User::create($user);
     }
 
-    public function save($user)
+    public function save(User $user)
     {
         return $user->save();
+
     }
 
     public function destroy(int $id)
@@ -48,5 +49,11 @@ class UserRepository implements IUserRepository
     public function sumWalletValue(int $id, float $value)
     {
        return User::where('id', $id)->update(array('wallet_balance' => $value));
+//        return 0;
+    }
+
+    public function findByEmail(string $email)
+    {
+        return User::where('email', $email)->first();
     }
 }
