@@ -7,3 +7,8 @@
 1. CRUD para cadastro de usuários
 2. Transações entre usuários ( Lojistas só recebem transações )
 
+## Como executar o projeto
+1. docker compose up -d --build
+2. docker exec -it php composer install
+3. docker exec -it php php artisan migrate
+4. docker exec -it php php artisan db:seed
