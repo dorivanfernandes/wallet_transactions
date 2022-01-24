@@ -34,6 +34,7 @@ class UserService
 
     public function find(int $id)
     {
+
         $recurso = $this->userRepository->find($id);
         if(is_null($recurso)){
             throw new LogicException("", 204);
